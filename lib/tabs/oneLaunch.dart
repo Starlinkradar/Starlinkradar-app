@@ -88,9 +88,6 @@ class _OneLaunch extends State<OneLaunch> {
                                 ? TextStyle(color: Colors.green, fontSize: 10)
                                 : TextStyle(color: Colors.red, fontSize: 10),
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
                           Text(
                             "Details",
                             style: optionsStyle,
