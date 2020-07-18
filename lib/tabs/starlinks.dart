@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_app/tabs/oneStarlink.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/cupertino.dart';
@@ -9,11 +10,11 @@ import 'package:url_launcher/url_launcher.dart';
 import '../map.dart';
 
 Future<List> getStarlinks() async {
-  String apiURL = "https://trackstarlink.herokuapp.com/api/all";
+  String apiURL = "https://spacex.moesalih.com/starlink/api";
   http.Response response = await http.get(apiURL);
   var entireData = json.decode(response.body);
   if (response.statusCode == 200) {
-    return entireData["features"];
+    return entireData;
   } else {
     throw ("Could not fetch starlinks");
   }
@@ -71,37 +72,39 @@ class _StarlinksList extends State<Starlinks> {
                         children: <Widget>[
                           ListTile(
                             leading: Icon(Icons.satellite),
-                            title: _data[index]["properties"]["name"] != null
-                                ? Text(_data[index]["properties"]["name"])
+                            title: _data[index]["name"] != null
+                                ? Text(_data[index]["name"])
                                 : Text("Undefined"),
                             subtitle: Text(
-                                'Norad ID : ${_data[index]["properties"]["id"]}\nDesignator/ID : ${_data[index]["properties"]["designator"]}\nLaunch : ${_data[index]["properties"]["launch"]}'),
+                                'Norad ID : ${_data[index]["id"]}\nDesignator/ID : ${_data[index]["designator"]}\nLaunch : ${_data[index]["launch"]}'),
                           ),
                           ButtonBar(
                             children: <Widget>[
-                              //FlatButton(
-                              //  child: const Text('Youtube'),
-                              //  textColor:
-                              //      _data[index]["links"]["wikipedia"] != null
-                              //          ? Colors.blue[500]
-                              //          : Colors.grey[500],
-                              //  onPressed: () {
-                              //    if (_data[index]["links"]["wikipedia"] !=
-                              //        null) {
-                              //      _launchURL(
-                              //          _data[index]["links"]["video_link"]);
-                              //    }
-                              //  },
-                              //),
+                              OutlineButton(
+                                  child: const Text('Expand'),
+                                  textColor: Colors.blue[500],
+                                  //textColor:
+                                  //    _data[index]["links"]["wikipedia"] != null
+                                  //        ? Colors.blue[500]
+                                  //        : Colors.grey[500],
+                                  onPressed: () {
+                                    OneStarlink().yes(index);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                OneStarlink()));
+                                  }),
                               OutlineButton(
                                 child: const Text('N2YO'),
+                                textColor: Colors.blue[500],
                                 //textColor:
                                 //    _data[index]["links"]["wikipedia"] != null
                                 //        ? Colors.blue[500]
                                 //        : Colors.grey[500],
                                 onPressed: () {
                                   _launchURL(
-                                      "https://www.n2yo.com/satellite/?s=${_data[index]["properties"]["id"]}");
+                                      "https://www.n2yo.com/satellite/?s=${_data[index]["id"]}");
                                 },
                               ),
                             ],

@@ -8,11 +8,15 @@
 //
 // ![A scaffold with a bottom navigation bar containing three bottom navigation
 // bar items. The first one is selected.](https://flutter.github.io/assets-for-api-docs/assets/material/bottom_navigation_bar.png)
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_app/tabs/pastlaunches.dart';
 import 'package:flutter_app/tabs/starlinks.dart';
 
 import 'package:flutter/material.dart';
 import 'tabs/about.dart';
+
+///import 'package:http/http.dart' as http;
+///import 'dart:convert';
 
 void main() => runApp(MyApp());
 
@@ -45,14 +49,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget bottomNavigationCallPage(int currentIndex) {
     switch (currentIndex) {
       case 0:
-        return Launches();
+        return SafeArea(child: Launches());
       case 1:
-        return Starlinks();
+        return SafeArea(child: Starlinks());
       case 2:
-        return About();
+        return SafeArea(child: About());
         break;
       default:
-        return About();
+        return SafeArea(child: About());
     }
   }
 

@@ -1,9 +1,10 @@
-import 'dart:async';
+//import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
+/*import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:map_controller/map_controller.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;*/
+import 'package:webview_flutter/webview_flutter.dart';
 
 ///var datamdr;
 ///
@@ -23,7 +24,7 @@ import 'package:http/http.dart' as http;
 ///}
 
 class _MapPageState extends State<MapPage> {
-  MapController mapController;
+  /*MapController mapController;
   StatefulMapController statefulMapController;
   StreamSubscription<StatefulMapControllerStateChange> sub;
 
@@ -44,37 +45,27 @@ class _MapPageState extends State<MapPage> {
     sub = statefulMapController.changeFeed.listen((change) => setState(() {}));
     statefulMapController.switchTileLayer(TileLayerType.monochrome);
     super.initState();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Starlinkradar"),
-          centerTitle: true,
-        ),
-        body: SafeArea(
-            child: Stack(children: <Widget>[
-          FlutterMap(
-            mapController: mapController,
-            options: MapOptions(center: LatLng(48.853831, 2.348722), zoom: 3.0),
-            layers: [
-              statefulMapController.tileLayer,
-              MarkerLayerOptions(markers: statefulMapController.markers),
-            ],
-          ),
-          //Positioned(
-          //    top: 15.0,
-          //    right: 15.0,
-          //    child: TileLayersBar(controller: statefulMapController))
-        ])));
+      appBar: AppBar(
+        title: Text("Starlinkradar"),
+        //centerTitle: true,
+      ),
+      body: WebView(
+        initialUrl: 'https://starlinkradar.com/livemap.html',
+        javascriptMode: JavascriptMode.unrestricted,
+      ),
+    );
   }
 
-  @override
+  /*@override
   void dispose() {
     sub.cancel();
     super.dispose();
-  }
+  }*/
 }
 
 class MapPage extends StatefulWidget {

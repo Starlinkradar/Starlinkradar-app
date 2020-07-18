@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
 
+import 'oneLaunch.dart';
+
 Future<List> getAPIData() async {
   String apiURL = "https://api.spacexdata.com/v3/launches/past?order=desc";
   http.Response response = await http.get(apiURL);
@@ -85,6 +87,16 @@ class _LaunchesList extends State<Launches> {
                           ),
                           ButtonBar(
                             children: <Widget>[
+                              OutlineButton(
+                                  textColor: Colors.blue[500],
+                                  child: const Text("Expand"),
+                                  onPressed: () {
+                                    OneLaunch().yes(index);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => OneLaunch()));
+                                  }),
                               _data[index]["links"]["wikipedia"] != null
                                   ? OutlineButton(
                                       child: const Text('Youtube'),
@@ -150,7 +162,7 @@ class _LaunchesList extends State<Launches> {
                                               ["wikipedia"]);
                                         }
                                       },
-                                    )
+                                    ),
                             ],
                           ),
                         ],
