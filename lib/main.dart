@@ -14,10 +14,10 @@ import 'package:flutter_app/tabs/starlinks.dart';
 import 'package:flutter/material.dart';
 import 'tabs/about.dart';
 
-///import 'package:http/http.dart' as http;
-///import 'dart:convert';
-
 void main() => runApp(MyApp());
+
+var brightness = SchedulerBinding.instance.window.platformBrightness;
+bool darkModeOn = brightness == Brightness.dark;
 
 /// This Widget is the main application widget.
 class MyApp extends StatelessWidget {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: MyStatefulWidget(),
-      //theme: ThemeData.dark(),
+      theme: darkModeOn ? ThemeData.dark() : ThemeData.light(),
     );
   }
 }
