@@ -27,9 +27,7 @@ dependencies:
   http:
   intl:
   url_launcher:
-  map_controller:
-  google_maps_flutter_geojson:
-    git: https://github.com/mateuszkulpa/google_maps_flutter_geojson.git
+  webview_flutter:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

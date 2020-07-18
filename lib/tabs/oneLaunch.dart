@@ -74,10 +74,14 @@ class _OneLaunch extends State<OneLaunch> {
                               SizedBox(
                                 width: 20,
                               ),
-                              Image.network(
-                                snapshot.data["links"]["mission_patch_small"],
-                                height: 50,
-                              )
+                              snapshot.data["links"]["mission_patch_small"] !=
+                                      null
+                                  ? Image.network(
+                                      snapshot.data["links"]
+                                          ["mission_patch_small"],
+                                      height: 50,
+                                    )
+                                  : Icon(Icons.location_disabled)
                             ],
                           ),
                           Text(
@@ -87,6 +91,9 @@ class _OneLaunch extends State<OneLaunch> {
                             style: snapshot.data["launch_success"]
                                 ? TextStyle(color: Colors.green, fontSize: 10)
                                 : TextStyle(color: Colors.red, fontSize: 10),
+                          ),
+                          SizedBox(
+                            height: 5,
                           ),
                           Text(
                             "Details",
