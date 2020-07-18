@@ -80,16 +80,13 @@ class _OneLaunch extends State<OneLaunch> {
                               )
                             ],
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
                           Text(
                             snapshot.data["launch_success"]
-                                ? "Launch failed"
-                                : "Success launch",
+                                ? "Successful Launch"
+                                : "Failed Launch",
                             style: snapshot.data["launch_success"]
-                                ? TextStyle(color: Colors.red, fontSize: 10)
-                                : TextStyle(color: Colors.blue, fontSize: 10),
+                                ? TextStyle(color: Colors.green, fontSize: 10)
+                                : TextStyle(color: Colors.red, fontSize: 10),
                           ),
                           SizedBox(
                             height: 5,
