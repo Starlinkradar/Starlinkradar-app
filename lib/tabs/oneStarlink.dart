@@ -6,22 +6,23 @@ import 'dart:convert';
 //import 'starlinks.dart';
 var index;
 
+String yes(getter) {
+  index = getter;
+}
+
+var i;
 Future getStarlink() async {
-  String apiURL = "https://trackstarlink.herokuapp.com/api/all";
+  String apiURL = "https://spacex.moesalih.com/starlink/api";
   http.Response response = await http.get(apiURL);
   var entireData = json.decode(response.body);
   if (response.statusCode == 200) {
-    return entireData["features"][index]["properties"];
+    return entireData[index];
   } else {
     throw ("Could not fetch starlinks");
   }
 }
 
 class OneStarlink extends StatefulWidget {
-  String yes(getter) {
-    index = getter;
-  }
-
   @override
   _OneStarlink createState() => _OneStarlink();
 }

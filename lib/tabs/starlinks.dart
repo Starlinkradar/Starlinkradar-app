@@ -88,7 +88,7 @@ class _StarlinksList extends State<Starlinks> {
                                   //        ? Colors.blue[500]
                                   //        : Colors.grey[500],
                                   onPressed: () {
-                                    OneStarlink().yes(index);
+                                    yes(index);
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
