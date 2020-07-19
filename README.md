@@ -1,7 +1,7 @@
-https://media.discordapp.net/attachments/544666013707272194/734278402667708446/1595135942254.png?width=262&height=439
-https://media.discordapp.net/attachments/544666013707272194/734278403708157952/1595135932001.png?width=262&height=439
-https://media.discordapp.net/attachments/544666013707272194/734278403351511160/1595135936728.png?width=262&height=439
-https://media.discordapp.net/attachments/544666013707272194/734278404068605973/1595135927547.png?width=262&height=439
+![launch_list](https://media.discordapp.net/attachments/544666013707272194/734278402667708446/1595135942254.png?width=262&height=439)
+![launch_expand](https://media.discordapp.net/attachments/544666013707272194/734278403708157952/1595135932001.png?width=262&height=439)
+![starlinks](https://media.discordapp.net/attachments/544666013707272194/734278403351511160/1595135936728.png?width=262&height=439)
+![starlink_expand](https://media.discordapp.net/attachments/544666013707272194/734278404068605973/1595135927547.png?width=262&height=439)
 
 # Starlinkradar
 
