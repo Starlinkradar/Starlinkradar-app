@@ -18,6 +18,8 @@ import 'tabs/about.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 ///import 'package:http/http.dart' as http;
 ///import 'dart:convert';
 
@@ -49,6 +51,18 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
+
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? false);
+
+    if (_seen) {
+      {}
+    } else {
+      await prefs.setBool('seen', true);
+      _showDialog();
+    }
+  }
 
   void _showDialog() {
     slideDialog.showSlideDialog(
@@ -106,7 +120,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void initState() {
     super.initState();
     new Future.delayed(Duration.zero, () {
-      _showDialog();
+      checkFirstSeen();
     });
   }
 

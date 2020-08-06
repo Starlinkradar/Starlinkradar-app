@@ -32,6 +32,7 @@ dependencies:
   #  git: https://github.com/mateuszkulpa/google_maps_flutter_geojson.git
   webview_flutter:
   slide_popup_dialog:
+  shared_preferences:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
