@@ -15,6 +15,9 @@ import 'package:flutter_app/tabs/starlinks.dart';
 import 'package:flutter/material.dart';
 import 'tabs/about.dart';
 
+import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
+import 'package:url_launcher/url_launcher.dart';
+
 ///import 'package:http/http.dart' as http;
 ///import 'dart:convert';
 
@@ -46,6 +49,67 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
+
+  void _showDialog() {
+    slideDialog.showSlideDialog(
+      context: context,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 15,
+          ),
+          //Text("Join our Discord Server!"),
+          Image.network(
+            "https://vignette.wikia.nocookie.net/mining-simulator/images/d/dd/Discord.png/revision/latest/scale-to-width-down/340?cb=20191203134506",
+            scale: 4.0,
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          OutlineButton.icon(
+              onPressed: () => _launchURL("https://discord.gg/BHdGqAX"),
+              icon: Icon(Icons.link),
+              label: Text("Join our Discord Server!")),
+          SizedBox(
+            height: 15,
+          ),
+          Image.network(
+            "https://i.imgur.com/0bCa8Oq.png",
+            scale: 4.0,
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          OutlineButton.icon(
+              onPressed: () => _launchURL("https://starlinkradar.com/"),
+              icon: Icon(Icons.link),
+              label: Text("Check out our website!")),
+          SizedBox(
+            height: 15,
+          ),
+          //Icon(Icons.keyboard_arrow_down)
+        ],
+      ),
+    );
+  }
+
+  _launchURL(loll) async {
+    var url = loll;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    new Future.delayed(Duration.zero, () {
+      _showDialog();
+    });
+  }
+
   Widget bottomNavigationCallPage(int currentIndex) {
     switch (currentIndex) {
       case 0:
