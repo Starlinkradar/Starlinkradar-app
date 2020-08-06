@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -12,6 +11,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.8/android" />
             <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-5.5.0/android" />
             <option value="C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter-0.3.22+1/android" />
           </set>

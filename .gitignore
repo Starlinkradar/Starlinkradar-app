@@ -56,3 +56,6 @@ android/app/src/main/AndroidManifest.xml
 .flutter-plugins-dependencies
 .flutter-plugins-dependencies
 .flutter-plugins
+*.ser
+*.iml
+*.iml
