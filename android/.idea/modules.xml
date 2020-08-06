@@ -4,11 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" group="android" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="android/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1700331959/flutter_plugin_android_lifecycle.iml" filepath="$PROJECT_DIR$/.idea/modules/-1700331959/flutter_plugin_android_lifecycle.iml" group="android/flutter_plugin_android_lifecycle" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-431492994/google_maps_flutter.iml" filepath="$PROJECT_DIR$/.idea/modules/-431492994/google_maps_flutter.iml" group="android/google_maps_flutter" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-449450049/path_provider.iml" filepath="$PROJECT_DIR$/.idea/modules/-449450049/path_provider.iml" group="android/path_provider" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-665880422/sqflite.iml" filepath="$PROJECT_DIR$/.idea/modules/-665880422/sqflite.iml" group="android/sqflite" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/2107075049/url_launcher.iml" filepath="$PROJECT_DIR$/.idea/modules/2107075049/url_launcher.iml" group="android/url_launcher" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1967433442/webview_flutter.iml" filepath="$PROJECT_DIR$/.idea/modules/-1967433442/webview_flutter.iml" group="android/webview_flutter" />
     </modules>
   </component>
 </project>

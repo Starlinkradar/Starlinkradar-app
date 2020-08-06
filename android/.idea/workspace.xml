@@ -56,7 +56,7 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -126,29 +126,29 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="690" y="302" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1594964196508" />
-    <state width="1340" height="224" key="GridCell.Tab.0.bottom" timestamp="1594964158153">
+    <state width="670" height="224" key="GridCell.Tab.0.bottom" timestamp="1595106371442">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1340" height="224" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1594964158153" />
-    <state width="1340" height="224" key="GridCell.Tab.0.center" timestamp="1594964158153">
+    <state width="670" height="224" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1595106371442" />
+    <state width="670" height="224" key="GridCell.Tab.0.center" timestamp="1595106371441">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1340" height="224" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1594964158153" />
-    <state width="1340" height="224" key="GridCell.Tab.0.left" timestamp="1594964158153">
+    <state width="670" height="224" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1595106371441" />
+    <state width="670" height="224" key="GridCell.Tab.0.left" timestamp="1595106371441">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1340" height="224" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1594964158153" />
-    <state width="1340" height="224" key="GridCell.Tab.0.right" timestamp="1594964158153">
+    <state width="670" height="224" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1595106371441" />
+    <state width="670" height="224" key="GridCell.Tab.0.right" timestamp="1595106371442">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1340" height="224" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1594964158153" />
-    <state x="54" y="190" width="1200" height="802" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1595025803738">
+    <state width="670" height="224" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1595106371442" />
+    <state x="54" y="190" width="1200" height="802" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1595195130129">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="54" y="190" width="1200" height="802" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1595025803738" />
-    <state x="547" y="370" key="com.intellij.ide.util.TipDialog" timestamp="1595025758578">
+    <state x="54" y="190" width="1200" height="802" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1595195130129" />
+    <state x="547" y="370" key="com.intellij.ide.util.TipDialog" timestamp="1596338837918">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="547" y="370" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1595025758578" />
+    <state x="547" y="370" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1596338837918" />
   </component>
 </project>

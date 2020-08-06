@@ -23,10 +23,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_maps_flutter:
+  #google_maps_flutter:
   http:
   intl:
   url_launcher:
+  #map_controller:
+  #google_maps_flutter_geojson:
+  #  git: https://github.com/mateuszkulpa/google_maps_flutter_geojson.git
   webview_flutter:
 
   # The following adds the Cupertino Icons font to your application.
@@ -62,6 +65,9 @@ flutter:
     - family: OpenSans
       fonts:
         - asset: fonts/OpenSans-Regular.ttf
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
