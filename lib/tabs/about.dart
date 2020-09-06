@@ -8,8 +8,6 @@ class About extends StatefulWidget {
 }
 
 class _Aboutme extends State<About> {
-  Future<List> futureLaunches;
-
   _launchURL(loll) async {
     var url = loll;
     if (await canLaunch(url)) {

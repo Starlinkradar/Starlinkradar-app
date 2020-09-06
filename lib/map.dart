@@ -1,74 +1,141 @@
-//import 'dart:async';
+import 'dart:collection';
+import 'dart:convert';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-/*import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
-import 'package:map_controller/map_controller.dart';
-import 'package:http/http.dart' as http;*/
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
-///var datamdr;
-///
-///Future<dynamic> fetchStarlinks() async {
-///  var response = await http.get('https://trackstarlink.herokuapp.com/api/all');
-///
-///  if (response.statusCode == 200) {
-///    // If the server did return a 200 OK response,
-///    // then parse the JSON.
-///    datamdr = json.decode(response.body);
-///    return json.decode(response.body);
-///  } else {
-///    // If the server did not return a 200 OK response,
-///    // then throw an exception.
-///    throw Exception('Failed to load past launches');
-///  }
-///}
+import 'utils.dart';
 
-class _MapPageState extends State<MapPage> {
-  /*MapController mapController;
-  StatefulMapController statefulMapController;
-  StreamSubscription<StatefulMapControllerStateChange> sub;
-
-  void loadData() async {
-    // print(fetchStarlinks());
-    print("Loading geojson data");
-    var data = await http.get('https://trackstarlink.herokuapp.com/api/all');
-
-    await statefulMapController.fromGeoJson(data.body,
-        markerIcon: Icon(Icons.satellite), verbose: true);
+Future<List> getStarlinks() async {
+  String apiURL = "https://starlinkradar.herokuapp.com/api/all";
+  http.Response response = await http.get(apiURL);
+  var entireData = json.decode(response.body);
+  if (response.statusCode == 200) {
+    return entireData["features"];
+  } else {
+    throw ("Could not fetch launches");
   }
-
-  @override
-  void initState() {
-    mapController = MapController();
-    statefulMapController = StatefulMapController(mapController: mapController);
-    statefulMapController.onReady.then((_) => loadData());
-    sub = statefulMapController.changeFeed.listen((change) => setState(() {}));
-    statefulMapController.switchTileLayer(TileLayerType.monochrome);
-    super.initState();
-  }*/
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Starlinkradar"),
-        //centerTitle: true,
-      ),
-      body: WebView(
-        initialUrl: 'https://starlinkradar.com/livemap.html',
-        javascriptMode: JavascriptMode.unrestricted,
-      ),
-    );
-  }
-
-  /*@override
-  void dispose() {
-    sub.cancel();
-    super.dispose();
-  }*/
 }
 
 class MapPage extends StatefulWidget {
   @override
-  _MapPageState createState() => _MapPageState();
+  _Map createState() => _Map();
+}
+
+class _Map extends State<MapPage> {
+  Future<List> futureTrackStarlinks;
+
+  BitmapDescriptor satIcon;
+
+  Timer timer;
+
+  Completer<GoogleMapController> _controller = Completer();
+
+  Set<Marker> _markers = HashSet<Marker>();
+
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(34.0, 2.0),
+    zoom: 5.0,
+  );
+
+  void _setMapStyle(GoogleMapController controller) async {
+    String style =
+        await DefaultAssetBundle.of(context).loadString('assets/mapStyle.json');
+    controller.setMapStyle(style);
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    _controller.complete(controller);
+
+    setState(() {});
+    _setMapStyle(controller);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    futureTrackStarlinks = getStarlinks();
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(size: Size(32, 32)), 'assets/sat.png')
+        .then((onValue) {
+      satIcon = onValue;
+    });
+    timer = Timer.periodic(Duration(seconds: 3), (Timer t) {
+      //_markers.clear();
+      //sleep(Duration(seconds: 1));
+      setState(() {
+        futureTrackStarlinks = getStarlinks();
+        //_markers = _markers;
+      });
+    });
+  }
+
+  void _showDialog(satName, satId, satDesignator, satVelocity, satHeight) {
+    slideDialog.showSlideDialog(
+      context: context,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 15,
+          ),
+          Icon(Icons.satellite),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            satName,
+            style: TextStyle(fontSize: 25),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Map"),
+      ),
+      body: FutureBuilder<List<dynamic>>(
+          future: futureTrackStarlinks,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              snapshot.data.forEach((element) {
+                try {
+                  double lat = element["geometry"]["coordinates"][1];
+                  double lng = element["geometry"]["coordinates"][0];
+                  _markers.add(
+                    Marker(
+                        markerId: MarkerId(
+                            element["properties"]["number"].toString()),
+                        icon: satIcon,
+                        onTap: () {},
+                        position: LatLng(lat, lng)),
+                  );
+                } catch (err) {
+                  print(err);
+                }
+              });
+
+              return GoogleMap(
+                initialCameraPosition: _kGooglePlex,
+                onMapCreated: _onMapCreated,
+                markers: _markers,
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
+      /*floatingActionButton: FloatingActionButton.extended(
+        onPressed: _goToTheLake,
+        label: Text('To the lake!'),
+        icon: Icon(Icons.directions_boat),
+      ),*/
+    );
+  }
 }

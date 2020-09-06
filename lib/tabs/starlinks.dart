@@ -5,9 +5,11 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../map.dart';
+import 'package:flutter_app/utils.dart';
+
+List globalData;
 
 Future<List> getStarlinks() async {
   String apiURL = "https://spacex.moesalih.com/starlink/api";
@@ -20,6 +22,25 @@ Future<List> getStarlinks() async {
   }
 }
 
+Future<List> dataFilter(input) async {
+  var filteredData = [];
+  globalData.forEach((element) {
+    if (element["name"]
+            .toString()
+            .toLowerCase()
+            .contains(input.toLowerCase()) ||
+        element["id"].toString().toLowerCase().contains(input.toLowerCase()) ||
+        element["designator"]
+            .toString()
+            .toLowerCase()
+            .contains(input.toLowerCase())) {
+      //print(element);
+      filteredData.add(element);
+    }
+  });
+  return filteredData;
+}
+
 class Starlinks extends StatefulWidget {
   @override
   _StarlinksList createState() => _StarlinksList();
@@ -28,30 +49,60 @@ class Starlinks extends StatefulWidget {
 class _StarlinksList extends State<Starlinks> {
   Future<List> futureStarlinks;
 
-  _launchURL(loll) async {
-    var url = loll;
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   @override
   void initState() {
     super.initState();
     futureStarlinks = getStarlinks();
   }
 
+  Icon search = Icon(Icons.search);
+  Widget searchBar = Text("Starlinks");
+
+  bool firstTime = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: searchBar,
+        actions: <Widget>[
+          IconButton(
+              icon: search,
+              onPressed: () {
+                setState(() {
+                  if (this.search.icon == Icons.search) {
+                    this.search = Icon(Icons.cancel);
+                    this.searchBar = TextField(
+                      textInputAction: TextInputAction.done,
+                      onChanged: (input) {
+                        setState(() {
+                          futureStarlinks = dataFilter(input);
+                        });
+                      },
+                    );
+                  } else {
+                    this.search = Icon(Icons.search);
+                    this.searchBar = Text("Starlinks");
+
+                    setState(() {
+                      futureStarlinks = dataFilter("");
+                    });
+                  }
+                });
+              })
+        ],
+      ),
       body: Container(
         child: FutureBuilder<List<dynamic>>(
           future: futureStarlinks,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               List _data = snapshot.data;
+              if (firstTime == true) {
+                globalData = _data;
+                firstTime = false;
+              }
+
               return ListView.builder(
                   padding: EdgeInsets.all(2.0),
                   itemCount: snapshot.data.length,
@@ -105,7 +156,7 @@ class _StarlinksList extends State<Starlinks> {
                                 //        ? Colors.blue[500]
                                 //        : Colors.grey[500],
                                 onPressed: () {
-                                  _launchURL(
+                                  openUrl(
                                       "https://www.n2yo.com/satellite/?s=${_data[index]["id"]}");
                                 },
                               ),
@@ -122,7 +173,7 @@ class _StarlinksList extends State<Starlinks> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        label: Text("Map (beta)"),
+        label: Text("Map"),
         icon: Icon(Icons.map),
         onPressed: () => Navigator.push(
             context, MaterialPageRoute(builder: (context) => MapPage())),
